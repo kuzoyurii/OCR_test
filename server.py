@@ -105,11 +105,11 @@ def home():
             latest_image = max(files_list, key=os.path.getctime)
             copyfile(latest_image, 'static/latest.png')
             print('latest')
-            return render_template('isb.html', sb_image = 'static/latest.png?' + str(datetime.datetime.now().timestamp()).split(".")[0])
+            return render_template('index.html', sb_image = 'static/latest.png?' + str(datetime.datetime.now().timestamp()).split(".")[0])
         except:
-            return render_template('isb.html', sb_image='static/sb.png')
+            return render_template('index.html', sb_image='static/sb.png')
     else:
-        return render_template('isb.html', sb_image='static/sb.png')
+        return render_template('index.html', sb_image='static/sb.png')
 
 
 @ocr_app.route('/controller', methods=['GET'])
