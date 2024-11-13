@@ -37,7 +37,7 @@ jobs:
 
       - name: Run server script
         run: |
-          python3 server.py
+          python3 server.py &
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
