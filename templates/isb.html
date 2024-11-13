@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+// <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<meta http-equiv="cache-control" content="no-cache" />
+<html>
+<head>
+    <title>SB</title>
+</head>
+<div>
+<button onclick="refreshImage()">Refresh</button>
+<button onclick="playImages()">Play</button>
+</div>
+<script>
+
+
+function refreshImage()
+{
+window.location.reload();
+}
+
+function changeImage()
+{
+var img = document.getElementById("sbimage");
+img.src="{{ sb_image }}";
+return false;
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function playImages()
+{
+for (let i = 0; i < 120; i++) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "/", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
+    var myImageElement = document.getElementById("sbimage");
+    myImageElement.src = "static/latest.png?rand=" + Math.random();
+    await sleep(500);
+}
+}
+
+
+</script>
+<style>
+    .max_size {
+    height: 80vh;
+}
+</style>
+// <body style="background-color:black;">
+<div>
+    <img id = "sbimage" src="{{sb_image}}"> // class="max_size">
+</div>
+</body>
+</html>

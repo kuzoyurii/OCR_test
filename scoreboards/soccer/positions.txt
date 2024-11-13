@@ -1,0 +1,11 @@
+AwayScoreOnes=625,158
+AwayScoreTens=551,158
+HomeScoreTens=29,158
+MinutesOnes=272,19
+MinutesTens=199,19
+SecondsTens=369,20
+SecondsOnes=443,20
+HomeScoreOnes=102,158
+HomeFouls=23,298
+AwayFouls=657,298
+Period=335,207

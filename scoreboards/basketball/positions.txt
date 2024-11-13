@@ -1,0 +1,13 @@
+HomeScoreTens=7,40
+HomeScoreOnes=57,40
+AwayScoreTens=323,40
+AwayScoreOnes=376,40
+Period=191,101
+MinutesTens=120,5
+MinutesOnes=164,5
+SecondsTens=222,5
+SecondsOnes=266,5
+HomeFouls=21,183
+AwayFouls=376,183
+ShotClockTens=167,183
+ShotClockOnes=219,183

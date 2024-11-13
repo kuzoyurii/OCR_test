@@ -1,0 +1,9 @@
+HomeScoreOnes=51,89
+HomeScoreTens=12,89
+AwayScoreOnes=345,89
+AwayScoreTens=305,89
+Period=179,114
+MinutesTens=109,10
+MinutesOnes=150,11
+SecondsOnes=249,11
+SecondsTens=207,11

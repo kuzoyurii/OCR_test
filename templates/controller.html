@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Controller</title>
+</head>
+<style>
+    .button_pad {
+  font-size: 14px;
+  padding-top: 3px;
+  padding-right: 5px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  }
+  .button_look {
+      padding: 8px 16px;
+      font-size: 14px;
+      display: inline-block;
+      margin: 4px 2px;
+      cursor: pointer;  }
+</style>
+<div>
+    <div title="Initialize Scoreboard. You can edit JSON in JSON-BOX" class="button_pad">
+<button onclick="Init()" class="button_look">Init</button>
+</div>
+</div>
+<div>
+    <div title="Run the PLAYER" class="button_pad">
+<button onclick="Player()" class="button_look">Player</button>
+</div>
+<div>
+    <div title="Turn ON your Scoreboard" class="button_pad">
+<button onclick="On()" class="button_look">On</button>
+</div>
+<div>
+    <div title="Start Clock" class="button_pad">
+<button onclick="StartClock()" class="button_look">StartClock</button>
+<input type="checkbox" id="clockdown" name="clockdown" value="CountDown" style="font-size:16pt">
+<label for="clockdown" style="font-size:16pt"> CountDown</label><br>
+</div>
+<div>
+    <div title="Set Period. Enter Value in Value box" class="button_pad">
+<button onclick="SetPeriod()" class="button_look">SetPeriod</button>
+</div>
+<div>
+    <div title="Set Score. Enter Value in Value box" class="button_pad">
+    <button onclick="SetHomeScore()" class="button_look">SetHomeScore</button>
+    <button onclick="SetAwayScore()" class="button_look">SetAwayScore</button>
+</div>
+<div>
+    <div title="Set Fouls. Enter Value in Value box" class="button_pad">
+    <button onclick="SetHomeFouls()" class="button_look">SetHomeFouls</button>
+    <button onclick="SetAwayFouls()" class="button_look">SetAwayFouls</button>
+</div>
+<div>
+    <div title="Quit. End Scoreboard Run" class="button_pad">
+<button onclick="Quit()" class="button_look">Quit</button>
+</div>
+<div>
+    <div title="Value (Required for Period/Score etc.)" class="button_pad">
+<textarea rows="1" cols="5" maxlength="5" style="font-size:14pt"  id="value" name="value" placeholder="Value"></textarea>
+</div>
+<script>
+
+
+
+function Init() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "init", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(jsons["Init"]));
+    xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         alert(this.responseText);
+     }
+    };
+}
+
+function Player() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "commands/player", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(jsons["Player"]));
+    xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         alert(this.responseText);
+     }
+    };
+}
+
+function On() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "commands/on", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify({}));
+    xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         alert(this.responseText);
+     }
+    };
+}
+
+function Quit() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "commands/quit", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify({}));
+    xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         alert(this.responseText);
+     }
+    };
+}
+
+function StartClock() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "startClock", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    if(document.getElementById("clockdown").checked) {
+        xhttp.send(JSON.stringify({"minutes": 10, "seconds": 0, "direction": "down"}));
+    } else {
+        xhttp.send(JSON.stringify({"minutes": 0, "seconds": 0, "direction": "up"}));
+    };
+    xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         alert(this.responseText);
+     }
+    };
+}
+
+function SetPeriod() {
+    var s = document.getElementById("value").value;
+    var i = parseInt(s)
+    var j = {"period": i}
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "setPeriod", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(j));
+    xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         alert(this.responseText);
+     }
+    };
+}
+
+function SetHomeScore() {
+    var s = document.getElementById("value").value;
+    var i = parseInt(s)
+    var j = {"homeScore": i}
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "setTeamScore", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(j));
+    xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         alert(this.responseText);
+     }
+    };
+}
+
+function SetAwayScore() {
+    var s = document.getElementById("value").value;
+    var i = parseInt(s)
+    var j = {"awayScore": i}
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "setTeamScore", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(j));
+    xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         alert(this.responseText);
+     }
+    };
+}
+
+function SetHomeFouls() {
+    var s = document.getElementById("value").value;
+    var i = parseInt(s)
+    var j = {"homeFouls": i}
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "setFouls", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(j));
+    xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         alert(this.responseText);
+     }
+    };
+}
+
+function SetAwayFouls() {
+    var s = document.getElementById("value").value;
+    var i = parseInt(s)
+    var j = {"awayFouls": i}
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "setFouls", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(j));
+    xhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+         alert(this.responseText);
+     }
+    };
+}
+
+function sendJson() {
+    var my_json = document.getElementById('myTextArea').value;
+    console.log("1 " + my_json)
+    console.log("2 " + slct)
+    switch (slct)
+    {
+        case "Init":
+            jsons["Init"] = JSON.parse(my_json)
+            console.log("3 " + jsons["Init"])
+            Init();
+            break;
+        case "Player":
+            jsons["Player"] = JSON.parse(my_json)
+            console.log("3 " + jsons["Player"])
+            Player();
+            break;
+    }
+}
+
+var jsons = {
+    "Init": {"scoreboard_id": "basketball", "font": 0, "shotclock": true, "debug": false, "period": 10, "up": false, "listen_port": 5503},
+    "Player": {"debug": false, "top": false, "zoom": 3}
+    "Start ShotClock":
+    }
+
+console.log("0 " + JSON.stringify(jsons["Init"]))
+var subjectObject = {"Init": jsons["Init"], "Player": jsons["Player"]}
+
+window.onload = function() {
+  var subjectSel = document.getElementById("subject");
+  for (var x in subjectObject) {
+    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+  }
+
+  subjectSel.onchange = function() {
+    subjectObject = {"Init": jsons["Init"], "Player": jsons["Player"]}
+    var ugly = JSON.stringify(subjectObject[this.value]);
+    slct = this.value
+    console.log(slct)
+    var obj = JSON.parse(ugly);
+    var pretty = JSON.stringify(obj, undefined, 4);
+    document.getElementById('myTextArea').value = pretty
+    //prettyPrint();
+    //display correct values
+  }
+};
+
+</script>
+
+<br><br>
+
+<form name="form1" id="form1" action="/action_page.php" style="font-size:16pt">
+  Command: <select name="subject" id="subject" style="font-size:14pt">
+    <option value="" selected="selected">Select Command</option>
+  </select>
+  <br><br>
+</form>
+
+<br>
+<div>
+    <div title="View or Edit JSON. Click Save after changes" style="font-size:14pt">
+    JSON-BOX
+<br>
+<textarea id="myTextArea" cols=50 rows=10 style="font-size:14pt">
+{
+}</textarea>
+<button onclick="sendJson()" class="button_look">SEND</button>
+</div>
+
+
+<body style="background-color:powderblue;">
+
+</body>
+</html>

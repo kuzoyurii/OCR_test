@@ -1,0 +1,9 @@
+HomeScoreTensSize=40,74
+HomeScoreOnesSize=40,74
+AwayScoreTensSize=40,74
+AwayScoreOnesSize=40,74
+MinutesTensSize=40,74
+MinutesOnesSize=40,74
+SecondsTensSize=40,74
+SecondsOnesSize=40,74
+PeriodSize=32,48
