@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install -r requirements.txt
+          python3 -m pip install -r requirements_full.txt
 
       - name: Run server script
         run: |
