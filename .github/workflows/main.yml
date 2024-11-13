@@ -43,6 +43,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # publish_dir: ./output  # Specify the temporary directory for deployment
+          publish_dir: ./public  # Specify the temporary directory for deployment
           publish_branch: gh-pages  # Deploy only to the gh-pages branch
           keep_files: false  # Avoid persisting files in git history
